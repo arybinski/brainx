@@ -224,6 +224,9 @@ def threshold_adjacency_matrix(adj_matrix, cost, uptri=False, return_thresh = Fa
     thresh (optional): float
         the real threshold value used to result in cost
     """
+    if type(adj_matrix) != np.ndarray:
+        raise TypeError('type(adj_matrix) must be np.array, not %s'\
+                            % (type(adj_matrix)))
     nnodes, _ = adj_matrix.shape
     ind = np.triu_indices(nnodes, 1)
     nedges = adj_matrix[ind].shape[0]
@@ -290,6 +293,9 @@ def make_cost_thresh_lookup(adjacency_matrix):
         raise ValueError('NAN found in adjacency matrix, this will cause'\
                 'improper behavior in sorting and improper results, '\
                 'please remove all nan ')
+    if type(adjacency_matrix) != np.ndarray:
+        raise TypeError('type(adjacency_matrix) must be np.array, not %s'\
+                            % (type(adjacency_matrix)))
     ind = np.triu_indices_from(adjacency_matrix, k = 1)
     edges = adjacency_matrix[ind]
     nedges = edges.shape[0]
